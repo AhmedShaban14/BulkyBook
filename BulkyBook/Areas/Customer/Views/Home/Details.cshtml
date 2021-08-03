@@ -1,0 +1,73 @@
+﻿@model ShoppingCart
+@using BulkyBook.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<form method="post">
+    <input type="hidden" asp-for="ProductId" />
+    <div class="divBackGroundImage">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-6 ">
+                        <h2 class="text-info">@Model.Product.Title</h2>
+                        <h4 class="text-warning">by :<b>@Model.Product.Author </b></h4>
+                    </div>
+                    <div class="col-lg-6 text-right pt-3 ">
+                        <p class="btn btn-success">@Model.Product.CoverType.Name</p>
+                        <p class="btn btn-warning">@Model.Product.Category.Name</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-9 pt-3">
+                        <h4 class="text-muted pb-2">ISBN : @Model.Product.ISBN</h4>
+                        <h4 class="text-muted pb-2">List Price :<strike>@Model.Product.ListPrice</strike> </h4>
+                        <div class="col-lg-6 pb-3 pl-0 ">
+                            <ul class="list-group pl-0 border-2 rounded">
+                                <li class="list-group-item bg-light">
+                                    Quantity : 1-49 &nbsp; 50-99
+                                    <hr />
+                                    Quantity : 1-49 &nbsp; 50-99
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="text-muted pb-2">@Model.Product.Description</p>
+                        <div class="row pb-2">
+                            <div class="col-3">
+                                <h3 class="text-primary">Count</h3>
+                            </div>
+                            <div class="col-9">
+                                <input type="number" class="form-control"  asp-for="Count"/>
+                                <span asp-validation-for="Count" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="~/Images/@Model.Product.ImageUrl" class="img-thumbnail" style="width:100%;height:300px" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6 col-12 pt-2">
+                        <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
+                    </div>
+
+                    <div class="col-lg-6 col-12 pt-2">
+                        <button type="submit" class="btn btn-primary form-control">Add To Cart</button>
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

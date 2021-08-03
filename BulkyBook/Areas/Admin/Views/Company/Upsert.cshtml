@@ -1,0 +1,108 @@
+﻿@model Company
+@{
+    ViewData["Title"] = "Upsert";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="divBackGroundImage">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Id != 0)
+        {
+            //Edit :
+            <input type="hidden" asp-for="Id" />
+        }
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-info">Add Company</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="StreetAddress"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="StreetAddress" class="form-control" />
+                        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="City"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="State"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="State" class="form-control" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="PostalCode"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="PostalCode" class="form-control" />
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="PhoneNumber"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="PhoneNumber" type="number" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row pb-1">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="IsAuthorizedCompany"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="IsAuthorizedCompany" type="checkbox" class="form-control" />
+                        <span asp-validation-for="IsAuthorizedCompany" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row pb-1">
+                    <div class="col-lg-8 offset-lg-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" asp-action="Upsert" class="btn btn-success form-control">Create</button>
+                            </div>
+                            <div class="col-6">
+                                <a asp-action="Index" class="btn btn-primary form-control">Back To List </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</form>
+
+
+

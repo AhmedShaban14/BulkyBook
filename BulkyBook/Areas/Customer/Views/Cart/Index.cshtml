@@ -1,0 +1,63 @@
+﻿@model BulkyBook.Models.ViewModel.ShoppingCartVM
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form method="post">
+    <div class="divBackGroundImage">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-6 d-lg-block d-none">
+                        <i class="fas fa-shopping-cart"></i>  &nbsp; Shopping Cart
+                    </div>
+                    <div class="col-lg-6 text-right col-12">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-info">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @foreach (var item in Model.ShoppingCarts)
+        {
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-2 col-12">
+                        <img src="~/Images/@item.Product.ImageUrl" class="img-thumbnail" height="100px" />
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <h3 class="text-muted">@item.Product.Title</h3>
+                        <h5 class="text-muted">@item.Product.Description</h5>
+                    </div>
+                    <div class="col-lg-2 col-12">
+                        <p class="text-danger">
+                            @((item.Product.Price).ToString("c")) X @item.Count
+                        </p>
+                    </div>
+
+                    <div class="col-lg-2 col-12">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a asp-action="Minus" asp-route-shoppingCartId="@item.Id" class="btn btn-danger text-white"><i class="fas fa-minus"></i></a>
+                                <a asp-action="Plus" asp-route-shoppingCartId="@item.Id" class="btn btn-primary text-white"><i class="fas fa-plus"></i></a>
+                            </div>
+                            <a asp-action="Remove" asp-route-shoppingCartId="@item.Id" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-8 col-12">
+                <a asp-action="Summary" class="btn btn-success form-control">Summary</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</form>
+

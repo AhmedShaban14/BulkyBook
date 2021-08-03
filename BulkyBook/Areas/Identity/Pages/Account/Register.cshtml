@@ -1,0 +1,133 @@
+﻿@page
+@model RegisterModel
+@using BulkyBook.Utility
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="py-4 my-4">
+    <div class="row form-group ">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <h3 class="col-12 text-success text-center">
+                            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+                            {
+                                <strong>Register User Acount </strong>
+                            }
+                            else
+                            {
+                                <strong>Sign Up</strong>
+                            }
+                        </h3>
+                        <hr />
+                        <div class="form-group py-2">
+                            <input asp-for="Input.UserName" placeholder="Name" class="form-control" />
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2">
+                            <input asp-for="Input.Email" placeholder="Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2 input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">+02</span>
+                            </div>
+                            <input asp-for="Input.PhoneNumber" placeholder="Name" class="form-control" />
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2">
+                            <input asp-for="Input.StreetAddress" placeholder="StreetAddress" class="form-control" />
+                            <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2">
+                            <input asp-for="Input.City" placeholder="City" class="form-control" />
+                            <span asp-validation-for="Input.City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row py-2">
+                            <div class="col-6">
+                                <input asp-for="Input.State" placeholder="Name" class="form-control" />
+                                <span asp-validation-for="Input.State" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <input asp-for="Input.PostalCode" placeholder="PostalCode" class="form-control" />
+                                <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row py-2">
+                            <div class="col-6">
+                                <input asp-for="Input.Password" placeholder="Password" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <input asp-for="Input.ConfirmPassword" placeholder="ConfirmPassword" class="form-control" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <div class="form-group pb-1">
+                                    <select asp-for="Input.Role" asp-items="@(new SelectList(Model.Input.Roles,"Name","Name"))" class="form-control">
+                                        <option>Select Role !</option>
+                                    </select>
+                                    <span asp-validation-for="Input.Role" class="text-danger"></span>
+                                </div>
+
+                            <div class="form-group  pb-1">
+                                    <select asp-for="Input.CompanyId" asp-items="@(new SelectList(Model.Input.companies,"Id","Name"))" class="form-control">
+                                        <option value="">Select Company Role</option>
+                                    </select>
+                                </div>
+                        }
+                        <div class="form-group pb-1">
+                            <button type="submit" class="btn btn-success form-control">Register</button>
+                        </div>
+                    </form>
+
+                    @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+                    {
+                         
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div class="row">
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                    <div class="col-6">
+                                        @if (provider.Name.ToLower().Contains("facebook"))
+                                        {
+                                            <button type="submit" class="btn btn-success form-control" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+
+                                        }
+                                        else
+                                        {
+                                            @if (provider.Name.ToLower().Contains("google"))
+                                            {
+                                                <button type="submit" class="btn btn-primary form-control" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+
+                                            }
+                                        }
+                                    </div>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

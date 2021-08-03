@@ -1,0 +1,49 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Upsert";
+}
+
+<form method="post" asp-action="Upsert">
+    @if(Model.Id != 0)
+    {
+        <input type="hidden" asp-for="Id"/>
+    }
+    <div class="divBackGroundImage border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-info">Category</h2>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-8 col-12">
+                <div class="row">
+                    <div class="col-lg-4 col-12">
+                        <label asp-for="Name" class="col-form-label"></label>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-8 col-12">
+                <div class="col-lg-8 offset-lg-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-12 pb-2">
+
+                            <button asp-action="Upsert" type="submit" class="btn btn-success form-control">Submit</button>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <a asp-action="Index" class="btn btn-primary form-control">Back To List</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</form>

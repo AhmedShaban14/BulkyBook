@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row divBackGroundImage">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6 col-12 pb-2 border rounded  mb-4">
+            <img src="~/Images/@product.ImageUrl" class="img-thumbnail" style="width:100%;height:250px" />
+            <h5 class="text-muted text-center">@product.Title</h5>
+            <h5 class="text-info">by : @product.Author</h5>
+            <h6 class="text-muted">List Price : <strike><b>@((product.ListPrice).ToString("c")) </b> </strike> </h6>
+            <h6 style="color:maroon">As low as :<b>@((product.Price).ToString("c")) </b> </h6>
+            <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-success form-control">Details</a>
+        </div>
+    }
+</div>
